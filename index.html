@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TecTextil Soluções Têxteis | Manutenção de Máquinas Industriais</title>
+<meta name="description" content="Especialistas em manutenção e reparo de máquinas de tecelagem, motores industriais e circuitos eletrônicos. +12 anos de experiência no setor têxtil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & VARIABLES ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #ffffff;
+  --navy-mid: #f0f7ff;
+  --navy-light: #e4f0ff;
+  --blue: #3b9cff;
+  --blue-accent: #0078e8;
+  --orange: #0a8fe8;
+  --orange-light: #3bacff;
+  --orange-glow: #3bacff40;
+  --white: #0d2137;
+  --gray-100: #1e3a5f;
+  --gray-200: #2d4a6f;
+  --gray-300: #5a7a9a;
+  --gray-400: #6889a8;
+  --gray-500: #a0b8cf;
+  --text: #0d2137;
+  --text-muted: #4a6d8c;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--navy);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* ========== UTILITY ========== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-label {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 32px;
+  height: 2px;
+  background: var(--orange);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 560px;
+}
+
+/* ========== ANIMATIONS ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--orange-glow); }
+  50% { box-shadow: 0 0 24px 8px var(--orange-glow); }
+}
+@keyframes gear-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes count-fade {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 16px 0;
+  transition: all 0.4s var(--ease);
+  background: transparent;
+}
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 10px 0;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+}
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.logo-icon::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,0.9);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.logo-icon::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.logo-text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--white);
+}
+.logo-text span {
+  color: var(--orange);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+.nav-links a {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--gray-300);
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--orange);
+  transition: width 0.3s var(--ease);
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  font-family: var(--font-heading) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  background: var(--orange) !important;
+  color: #ffffff !important;
+  padding: 10px 24px;
+  border-radius: 8px;
+  transition: all 0.3s var(--ease) !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover {
+  background: var(--orange-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--orange-glow);
+}
+
+/* Mobile menu */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+  z-index: 1001;
+}
+.menu-toggle span {
+  width: 26px;
+  height: 2.5px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all 0.3s var(--ease);
+}
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ========== HERO ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 80px;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(10, 143, 232, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(59, 172, 255, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+}
+.hero-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,80,160,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,80,160,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-gear {
+  position: absolute;
+  border: 2px solid rgba(10, 143, 232, 0.1);
+  border-radius: 50%;
+  animation: gear-spin 30s linear infinite;
+}
+.hero-gear-1 { width: 400px; height: 400px; top: -100px; right: -80px; }
+.hero-gear-2 { width: 250px; height: 250px; bottom: 60px; right: 15%; animation-direction: reverse; animation-duration: 20s; }
+.hero-gear-3 { width: 180px; height: 180px; top: 30%; left: -40px; animation-duration: 25s; }
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-content { max-width: 580px; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 143, 232, 0.08);
+  border: 1px solid rgba(10, 143, 232, 0.18);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--orange-light);
+  margin-bottom: 28px;
+  animation: slide-in-right 0.8s var(--ease) 0.2s both;
+}
+.hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  color: var(--white);
+  margin-bottom: 24px;
+  animation: slide-in-right 0.8s var(--ease) 0.3s both;
+}
+.hero h1 .highlight {
+  color: var(--orange);
+  position: relative;
+  display: inline-block;
+}
+.hero h1 .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--orange);
+  opacity: 0.3;
+  border-radius: 2px;
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--gray-300);
+  margin-bottom: 40px;
+  max-width: 480px;
+  animation: slide-in-right 0.8s var(--ease) 0.4s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: slide-in-right 0.8s var(--ease) 0.5s both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 16px 32px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s var(--ease);
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  color: #ffffff;
+  box-shadow: 0 8px 30px var(--orange-glow);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(10, 143, 232, 0.35);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--gray-500);
+}
+.btn-outline:hover {
+  border-color: var(--orange);
+  color: var(--orange-light);
+  transform: translateY(-3px);
+}
+.btn svg { width: 20px; height: 20px; }
+
+/* Hero visual */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 4/3;
+  border-radius: 20px;
+  overflow: hidden;
+  animation: slide-in-right 1s var(--ease) 0.5s both;
+}
+.hero-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-image-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10, 143, 232, 0.1), rgba(59, 172, 255, 0.08));
+  z-index: 1;
+}
+.hero-image-border {
+  position: absolute;
+  inset: -3px;
+  border-radius: 23px;
+  background: linear-gradient(135deg, var(--orange), var(--blue-accent), var(--orange));
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.hero-stat-float {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(10, 143, 232, 0.12);
+  border-radius: 14px;
+  padding: 16px 20px;
+  z-index: 3;
+  animation: float 4s ease-in-out infinite;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+.hero-stat-float-1 {
+  bottom: -20px;
+  left: -30px;
+  animation-delay: 0s;
+}
+.hero-stat-float-2 {
+  top: 20px;
+  right: -20px;
+  animation-delay: 1s;
+}
+.hero-stat-float .stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--orange);
+  line-height: 1;
+}
+.hero-stat-float .stat-label {
+  font-size: 0.75rem;
+  color: var(--gray-300);
+  margin-top: 2px;
+}
+
+/* ========== STATS BAR ========== */
+.stats-bar {
+  position: relative;
+  z-index: 5;
+  margin-top: -40px;
+  padding-bottom: 40px;
+}
+.stats-bar .container {
+  background: #ffffff;
+  border: 1px solid rgba(10, 143, 232, 0.1);
+  border-radius: 20px;
+  padding: 48px 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+}
+.stat-item {
+  text-align: center;
+  position: relative;
+}
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -16px;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(10, 143, 232, 0.1), transparent);
+}
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-text {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-300);
+  letter-spacing: 0.5px;
+}
+
+/* ========== ABOUT ========== */
+.about {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.about::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.04), transparent 70%);
+  top: -100px;
+  right: -200px;
+}
+.about .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-images {
+  position: relative;
+}
+.about-img-main {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+.about-img-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-img-main::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(255, 255, 255, 0.3));
+}
+.about-accent-box {
+  position: absolute;
+  bottom: -24px;
+  right: -24px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  border-radius: 16px;
+  padding: 24px 28px;
+  color: #ffffff;
+  z-index: 2;
+  box-shadow: 0 8px 30px rgba(10,143,232,0.3);
+}
+.about-accent-box .accent-num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  line-height: 1;
+}
+.about-accent-box .accent-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.about-content .section-desc { margin-bottom: 32px; }
+
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+.about-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(10, 143, 232, 0.03);
+  border: 1px solid rgba(10, 143, 232, 0.06);
+  border-radius: 12px;
+  transition: all 0.3s var(--ease);
+}
+.about-feature:hover {
+  background: rgba(10, 143, 232, 0.06);
+  border-color: rgba(10, 143, 232, 0.15);
+  transform: translateX(4px);
+}
+.about-feature-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  background: rgba(10, 143, 232, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-feature-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--orange);
+}
+.about-feature span {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--gray-200);
+}
+
+/* ========== SERVICES ========== */
+.services {
+  padding: 100px 0;
+  position: relative;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy) 100%);
+}
+.services-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.services-header .section-label { justify-content: center; }
+.services-header .section-label::before { display: none; }
+.services-header .section-desc {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.service-card {
+  background: #ffffff;
+  border: 1px solid rgba(10, 143, 232, 0.1);
+  border-radius: 20px;
+  padding: 40px 32px;
+  transition: all 0.4s var(--ease);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(10,143,232,0.04);
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+.service-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(10, 143, 232, 0.2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 0 40px rgba(10, 143, 232, 0.05);
+}
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(10, 143, 232, 0.12), rgba(10, 143, 232, 0.04));
+  border: 1px solid rgba(10, 143, 232, 0.1);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: all 0.4s var(--ease);
+}
+.service-card:hover .service-icon {
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  border-color: transparent;
+  box-shadow: 0 8px 24px var(--orange-glow);
+}
+.service-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--orange);
+  transition: stroke 0.4s;
+}
+.service-card:hover .service-icon svg { stroke: #ffffff; }
+
+.service-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.service-card p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--gray-400);
+}
+
+/* Featured card */
+.service-card.featured {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+  background: linear-gradient(135deg, #f5faff, #ffffff);
+  border-color: rgba(10, 143, 232, 0.15);
+}
+.service-card.featured .service-card-img {
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+}
+.service-card.featured .service-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ========== CONTACT / CTA ========== */
+.contact {
+  padding: 100px 0 80px;
+  position: relative;
+}
+.contact .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-cta {
+  background: linear-gradient(135deg, var(--orange), #0670c0);
+  border-radius: 24px;
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.contact-cta::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  top: -100px;
+  right: -80px;
+}
+.contact-cta::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  bottom: -80px;
+  left: -60px;
+}
+.contact-cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.contact-cta p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
+}
+.contact-cta .btn {
+  background: #ffffff;
+  color: var(--orange);
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+.contact-cta .btn:hover {
+  background: var(--white);
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+
+.contact-info { padding-top: 16px; }
+.contact-info h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+
+.contact-items { display: flex; flex-direction: column; gap: 20px; }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: rgba(10, 143, 232, 0.03);
+  border: 1px solid rgba(10, 143, 232, 0.08);
+  border-radius: 14px;
+  transition: all 0.3s var(--ease);
+}
+.contact-item:hover {
+  background: rgba(10, 143, 232, 0.05);
+  border-color: rgba(10, 143, 232, 0.15);
+  transform: translateX(6px);
+}
+.contact-item-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background: rgba(10, 143, 232, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-item-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--orange);
+}
+.contact-item-text strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+.contact-item-text span {
+  font-size: 0.88rem;
+  color: var(--gray-400);
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  border-top: 1px solid rgba(10, 143, 232, 0.06);
+  padding: 40px 0;
+}
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-copy {
+  font-size: 0.85rem;
+  color: var(--gray-500);
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--gray-400);
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--orange); }
+
+/* ========== WHATSAPP FLOAT ========== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  width: 64px;
+  height: 64px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s var(--ease);
+  animation: whatsapp-pulse 3s ease-in-out infinite;
+}
+@keyframes whatsapp-pulse {
+  0%, 100% { box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4); }
+  50% { box-shadow: 0 6px 24px rgba(37, 211, 102, 0.7), 0 0 20px rgba(37, 211, 102, 0.3); }
+}
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5);
+}
+.whatsapp-float svg {
+  width: 32px;
+  height: 32px;
+  fill: #fff;
+}
+.whatsapp-tooltip {
+  position: absolute;
+  right: 76px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--navy-light);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.whatsapp-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-left-color: var(--navy-light);
+}
+.whatsapp-float:hover .whatsapp-tooltip { opacity: 1; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .hero .container { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual { display: none; }
+  .hero-content { max-width: 100%; text-align: center; }
+  .hero-desc { margin: 0 auto 40px; }
+  .hero-actions { justify-content: center; }
+  .hero-badge { margin: 0 auto 28px; }
+
+  .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2)::after { display: none; }
+
+  .about .container { grid-template-columns: 1fr; gap: 48px; }
+  .about-images { max-width: 500px; margin: 0 auto; }
+
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .service-card.featured {
+    grid-column: span 2;
+    grid-template-columns: 1fr;
+  }
+
+  .contact .container { grid-template-columns: 1fr; gap: 48px; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { 
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { font-size: 1.2rem; }
+  .menu-toggle { display: flex; }
+
+  .hero { min-height: auto; padding: 140px 0 60px; }
+  .hero h1 { font-size: clamp(2.8rem, 10vw, 4rem); }
+
+  .stats-bar .container {
+    grid-template-columns: 1fr 1fr;
+    padding: 32px 24px;
+    gap: 24px;
+  }
+  .stat-item::after { display: none; }
+
+  .about-features { grid-template-columns: 1fr; }
+
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card.featured { grid-column: span 1; }
+
+  .contact-cta { padding: 36px 28px; }
+}
+
+@media (max-width: 480px) {
+  .stats-bar .container { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#" class="logo">
+      <div class="logo-icon"></div>
+      <div class="logo-text">Tec<span>Textil</span></div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Início</a>
+      <a href="#about">Sobre</a>
+      <a href="#services">Serviços</a>
+      <a href="#contact">Contato</a>
+      <a href="https://wa.me/5547999990000?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." class="nav-cta">Orçamento</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-pattern"></div>
+  <div class="hero-gear hero-gear-1"></div>
+  <div class="hero-gear hero-gear-2"></div>
+  <div class="hero-gear hero-gear-3"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Referência em manutenção têxtil
+      </div>
+      <h1>SOLUÇÕES QUE MANTÊM SUA <span class="highlight">PRODUÇÃO</span> EM MOVIMENTO</h1>
+      <p class="hero-desc">Especialistas em manutenção e reparo de máquinas de tecelagem, motores industriais e circuitos eletrônicos. Mais de 12 anos garantindo a continuidade da sua operação.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/5547999990000?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." class="btn btn-primary" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Solicitar Orçamento
+        </a>
+        <a href="#services" class="btn btn-outline">
+          Nossos Serviços
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-image-wrapper">
+        <div class="hero-image-border"></div>
+        <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;background:linear-gradient(135deg,#e8f4fd,#d0e8f9)">
+          <defs>
+            <linearGradient id="hg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0a8fe8" stop-opacity="0.15"/><stop offset="100%" stop-color="#3bacff" stop-opacity="0.08"/></linearGradient>
+            <linearGradient id="hg2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0a8fe8"/><stop offset="100%" stop-color="#0670c0"/></linearGradient>
+          </defs>
+          <rect fill="url(#hg1)" width="800" height="600"/>
+          <!-- Floor -->
+          <rect x="0" y="460" width="800" height="140" fill="#c8dff0" opacity="0.5"/>
+          <line x1="0" y1="460" x2="800" y2="460" stroke="#0a8fe8" stroke-width="1" opacity="0.2"/>
+          <!-- Machine body -->
+          <rect x="120" y="180" width="280" height="280" rx="12" fill="#ffffff" stroke="#0a8fe8" stroke-width="2" opacity="0.9"/>
+          <rect x="140" y="200" width="240" height="120" rx="8" fill="#e8f4fd" stroke="#3bacff" stroke-width="1.5"/>
+          <!-- Control panel -->
+          <rect x="160" y="220" width="60" height="60" rx="6" fill="#0a8fe8" opacity="0.15"/>
+          <circle cx="190" cy="250" r="15" fill="#0a8fe8" opacity="0.6"/><circle cx="190" cy="250" r="6" fill="#ffffff"/>
+          <rect x="240" y="225" width="50" height="8" rx="4" fill="#3bacff" opacity="0.4"/>
+          <rect x="240" y="245" width="35" height="8" rx="4" fill="#3bacff" opacity="0.3"/>
+          <rect x="240" y="265" width="45" height="8" rx="4" fill="#0a8fe8" opacity="0.4"/>
+          <!-- Gear 1 -->
+          <g transform="translate(480,280)">
+            <circle r="80" fill="none" stroke="#0a8fe8" stroke-width="3" opacity="0.25"/>
+            <circle r="60" fill="none" stroke="#0a8fe8" stroke-width="2" opacity="0.15"/>
+            <circle r="15" fill="#0a8fe8" opacity="0.2"/>
+            <circle r="6" fill="#0a8fe8" opacity="0.4"/>
+            <g stroke="#0a8fe8" stroke-width="6" opacity="0.2" stroke-linecap="round">
+              <line x1="0" y1="-65" x2="0" y2="-85"/><line x1="56" y1="-33" x2="74" y2="-43"/>
+              <line x1="56" y1="33" x2="74" y2="43"/><line x1="0" y1="65" x2="0" y2="85"/>
+              <line x1="-56" y1="33" x2="-74" y2="43"/><line x1="-56" y1="-33" x2="-74" y2="-43"/>
+            </g>
+          </g>
+          <!-- Gear 2 small -->
+          <g transform="translate(620,180)">
+            <circle r="40" fill="none" stroke="#3bacff" stroke-width="2.5" opacity="0.2"/>
+            <circle r="25" fill="none" stroke="#3bacff" stroke-width="1.5" opacity="0.12"/>
+            <circle r="8" fill="#3bacff" opacity="0.2"/>
+            <g stroke="#3bacff" stroke-width="4" opacity="0.15" stroke-linecap="round">
+              <line x1="0" y1="-30" x2="0" y2="-44"/><line x1="26" y1="-15" x2="38" y2="-22"/>
+              <line x1="26" y1="15" x2="38" y2="22"/><line x1="0" y1="30" x2="0" y2="44"/>
+              <line x1="-26" y1="15" x2="-38" y2="22"/><line x1="-26" y1="-15" x2="-38" y2="-22"/>
+            </g>
+          </g>
+          <!-- Thread lines -->
+          <g stroke="#0a8fe8" stroke-width="1.5" opacity="0.12">
+            <line x1="150" y1="340" x2="380" y2="340"/><line x1="150" y1="360" x2="380" y2="360"/>
+            <line x1="150" y1="380" x2="380" y2="380"/><line x1="150" y1="400" x2="380" y2="400"/>
+            <line x1="150" y1="420" x2="380" y2="420"/>
+          </g>
+          <!-- Wrench icon -->
+          <g transform="translate(540,420)" opacity="0.2">
+            <path d="M-20,-20 L20,20 M15,25 L25,15" stroke="#0a8fe8" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <circle cx="22" cy="22" r="8" fill="none" stroke="#0a8fe8" stroke-width="3"/>
+          </g>
+          <!-- Decorative dots -->
+          <g fill="#0a8fe8" opacity="0.08">
+            <circle cx="680" cy="100" r="4"/><circle cx="700" cy="100" r="4"/><circle cx="720" cy="100" r="4"/>
+            <circle cx="680" cy="120" r="4"/><circle cx="700" cy="120" r="4"/><circle cx="720" cy="120" r="4"/>
+            <circle cx="680" cy="140" r="4"/><circle cx="700" cy="140" r="4"/><circle cx="720" cy="140" r="4"/>
+          </g>
+        </svg>
+        <div class="hero-stat-float hero-stat-float-1">
+          <div class="stat-num">98%</div>
+          <div class="stat-label">Satisfação dos clientes</div>
+        </div>
+        <div class="hero-stat-float hero-stat-float-2">
+          <div class="stat-num">24h</div>
+          <div class="stat-label">Atendimento emergencial</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="container reveal">
+    <div class="stat-item">
+      <div class="stat-number" data-target="12">+0</div>
+      <div class="stat-text">Anos de Experiência</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="350">+0</div>
+      <div class="stat-text">Máquinas Reparadas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="120">+0</div>
+      <div class="stat-text">Clientes Atendidos</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="98" data-suffix="%">0%</div>
+      <div class="stat-text">Satisfação Garantida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-images reveal">
+      <div class="about-img-main">
+        <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;background:linear-gradient(135deg,#e8f4fd,#d4ecfa)">
+          <defs>
+            <linearGradient id="ag1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0a8fe8" stop-opacity="0.1"/><stop offset="100%" stop-color="#3bacff" stop-opacity="0.05"/></linearGradient>
+          </defs>
+          <rect fill="url(#ag1)" width="800" height="600"/>
+          <!-- Workshop floor -->
+          <rect x="0" y="440" width="800" height="160" fill="#cce1f2" opacity="0.4"/>
+          <!-- Workbench -->
+          <rect x="80" y="300" width="350" height="20" rx="4" fill="#0a8fe8" opacity="0.15"/>
+          <rect x="100" y="320" width="12" height="120" fill="#0a8fe8" opacity="0.1"/>
+          <rect x="400" y="320" width="12" height="120" fill="#0a8fe8" opacity="0.1"/>
+          <!-- Motor on bench -->
+          <rect x="160" y="230" width="120" height="70" rx="10" fill="#ffffff" stroke="#0a8fe8" stroke-width="2" opacity="0.9"/>
+          <circle cx="220" cy="265" r="22" fill="none" stroke="#0a8fe8" stroke-width="2.5" opacity="0.4"/>
+          <circle cx="220" cy="265" r="8" fill="#0a8fe8" opacity="0.3"/>
+          <rect x="280" y="250" width="40" height="30" rx="4" fill="#e8f4fd" stroke="#3bacff" stroke-width="1"/>
+          <!-- Person silhouette -->
+          <g transform="translate(500,200)" opacity="0.18">
+            <circle cx="0" cy="0" r="28" fill="#0a8fe8"/>
+            <path d="M-30,40 Q-35,80 -25,150 L25,150 Q35,80 30,40 Z" fill="#0a8fe8"/>
+            <path d="M-30,60 L-70,120" stroke="#0a8fe8" stroke-width="10" stroke-linecap="round"/>
+            <path d="M30,60 L55,130" stroke="#0a8fe8" stroke-width="10" stroke-linecap="round"/>
+          </g>
+          <!-- Multimeter -->
+          <rect x="580" y="280" width="60" height="80" rx="8" fill="#ffffff" stroke="#0a8fe8" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="610" cy="310" r="14" fill="none" stroke="#3bacff" stroke-width="1.5" opacity="0.5"/>
+          <rect x="595" y="340" width="30" height="6" rx="3" fill="#0a8fe8" opacity="0.2"/>
+          <!-- Circuit board pattern -->
+          <g stroke="#0a8fe8" stroke-width="1" opacity="0.08" fill="none">
+            <path d="M50,100 H150 V150 H200"/><path d="M100,80 V130 H180"/>
+            <path d="M600,80 H700 V120"/><path d="M650,60 V110 H720"/>
+            <circle cx="150" cy="100" r="3" fill="#0a8fe8"/><circle cx="200" cy="150" r="3" fill="#0a8fe8"/>
+            <circle cx="700" cy="80" r="3" fill="#0a8fe8"/><circle cx="650" cy="110" r="3" fill="#0a8fe8"/>
+          </g>
+          <!-- Tools -->
+          <g transform="translate(380,240)" opacity="0.15">
+            <rect x="0" y="0" width="6" height="50" rx="3" fill="#0a8fe8" transform="rotate(-30)"/>
+            <rect x="15" y="-5" width="6" height="55" rx="3" fill="#3bacff" transform="rotate(15)"/>
+          </g>
+          <!-- Spark dots -->
+          <g fill="#3bacff" opacity="0.3">
+            <circle cx="270" cy="240" r="2"/><circle cx="280" cy="235" r="1.5"/>
+            <circle cx="265" cy="248" r="1"/><circle cx="285" cy="242" r="2.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="about-accent-box">
+        <div class="accent-num">+12</div>
+        <div class="accent-text">anos no mercado</div>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-label reveal">Sobre nós</div>
+      <h2 class="section-title reveal reveal-delay-1">Compromisso com a <span style="color:var(--orange)">excelência</span> técnica</h2>
+      <p class="section-desc reveal reveal-delay-2">A TecTextil nasceu da paixão por resolver desafios técnicos complexos do setor têxtil. Com mais de uma década de atuação, somos referência em Joinville e região na manutenção de máquinas de tecelagem, motores industriais e placas eletrônicas.</p>
+      <p class="section-desc reveal reveal-delay-2" style="margin-top:16px">Nossa equipe é formada por técnicos especializados que combinam experiência prática com conhecimento avançado, garantindo diagnósticos precisos e reparos duradouros para sua linha de produção.</p>
+      <div class="about-features reveal reveal-delay-3">
+        <div class="about-feature">
+          <div class="about-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span>Garantia em todos os serviços</span>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span>Atendimento ágil e pontual</span>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span>Equipe técnica certificada</span>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <span>Diagnóstico de precisão</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label reveal">Nossos serviços</div>
+      <h2 class="section-title reveal reveal-delay-1">Soluções completas para sua <span style="color:var(--orange)">indústria</span></h2>
+      <p class="section-desc reveal reveal-delay-2">Oferecemos um portfólio completo de serviços técnicos para manter sua operação funcionando com máxima eficiência e mínimo tempo de parada.</p>
+    </div>
+
+    <div class="services-grid">
+      <!-- Featured card -->
+      <div class="service-card featured reveal">
+        <div class="service-card-img">
+          <svg viewBox="0 0 600 375" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;background:linear-gradient(135deg,#e8f4fd,#d8edfa)">
+            <defs>
+              <linearGradient id="sg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0a8fe8" stop-opacity="0.08"/><stop offset="100%" stop-color="#3bacff" stop-opacity="0.04"/></linearGradient>
+            </defs>
+            <rect fill="url(#sg1)" width="600" height="375"/>
+            <!-- Loom frame -->
+            <rect x="60" y="60" width="480" height="260" rx="8" fill="none" stroke="#0a8fe8" stroke-width="2" opacity="0.2"/>
+            <rect x="80" y="80" width="440" height="30" rx="6" fill="#0a8fe8" opacity="0.08"/>
+            <!-- Warp threads -->
+            <g stroke="#0a8fe8" stroke-width="1.2" opacity="0.15">
+              <line x1="120" y1="110" x2="120" y2="290"/><line x1="150" y1="110" x2="150" y2="290"/>
+              <line x1="180" y1="110" x2="180" y2="290"/><line x1="210" y1="110" x2="210" y2="290"/>
+              <line x1="240" y1="110" x2="240" y2="290"/><line x1="270" y1="110" x2="270" y2="290"/>
+              <line x1="300" y1="110" x2="300" y2="290"/><line x1="330" y1="110" x2="330" y2="290"/>
+              <line x1="360" y1="110" x2="360" y2="290"/><line x1="390" y1="110" x2="390" y2="290"/>
+              <line x1="420" y1="110" x2="420" y2="290"/><line x1="450" y1="110" x2="450" y2="290"/>
+              <line x1="480" y1="110" x2="480" y2="290"/>
+            </g>
+            <!-- Weft threads -->
+            <g stroke="#3bacff" stroke-width="1" opacity="0.12">
+              <line x1="100" y1="140" x2="500" y2="140"/><line x1="100" y1="170" x2="500" y2="170"/>
+              <line x1="100" y1="200" x2="500" y2="200"/><line x1="100" y1="230" x2="500" y2="230"/>
+              <line x1="100" y1="260" x2="500" y2="260"/>
+            </g>
+            <!-- Shuttle -->
+            <rect x="200" y="185" width="80" height="16" rx="8" fill="#0a8fe8" opacity="0.25"/>
+            <circle cx="215" cy="193" r="4" fill="#ffffff" opacity="0.6"/>
+            <!-- Bobbin -->
+            <g transform="translate(500,180)" opacity="0.2">
+              <rect x="0" y="0" width="40" height="60" rx="6" fill="#e8f4fd" stroke="#0a8fe8" stroke-width="1.5"/>
+              <ellipse cx="20" cy="30" rx="12" ry="20" fill="none" stroke="#3bacff" stroke-width="1"/>
+            </g>
+            <!-- Fabric pattern woven area -->
+            <rect x="110" y="140" width="380" height="120" fill="#0a8fe8" opacity="0.03" rx="4"/>
+            <!-- Roller bars -->
+            <rect x="90" y="105" width="420" height="8" rx="4" fill="#0a8fe8" opacity="0.12"/>
+            <rect x="90" y="285" width="420" height="8" rx="4" fill="#0a8fe8" opacity="0.12"/>
+          </svg>
+        </div>
+        <div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
+          </div>
+          <h3>Manutenção de Máquinas de Tecelagem</h3>
+          <p>Serviço especializado em teares circulares, retilíneos e planos. Realizamos manutenção preventiva e corretiva completa, incluindo alinhamento mecânico, substituição de peças e calibração de sistemas, garantindo a máxima produtividade do seu parque fabril.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <h3>Reparo de Motores Industriais</h3>
+        <p>Rebobinamento, troca de rolamentos, balanceamento dinâmico e restauração completa de motores elétricos mono e trifásicos de todas as potências.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"/></svg>
+        </div>
+        <h3>Conserto de Placas Eletrônicas</h3>
+        <p>Reparo de CLPs, inversores de frequência, placas de controle e circuitos eletrônicos industriais com componentes originais e testes rigorosos.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>Diagnóstico Técnico</h3>
+        <p>Análise completa do equipamento com relatório detalhado, identificando falhas, desgastes e pontos de melhoria para otimizar o desempenho.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3>Atendimento Emergencial</h3>
+        <p>Suporte técnico de urgência para minimizar paradas não programadas. Equipe pronta para atender chamados críticos com rapidez e eficiência.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-cta reveal">
+      <h2>PRONTO PARA MANTER SUA PRODUÇÃO NO RITMO?</h2>
+      <p>Entre em contato agora mesmo e receba um diagnóstico técnico personalizado para o seu maquinário. Nossa equipe está pronta para atender você.</p>
+      <a href="https://wa.me/5547999990000?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." class="btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Falar pelo WhatsApp
+      </a>
+    </div>
+
+    <div class="contact-info reveal reveal-delay-2">
+      <h3>Informações de contato</h3>
+      <div class="contact-items">
+        <a href="https://wa.me/5547999990000" class="contact-item" target="_blank" rel="noopener">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <strong>WhatsApp</strong>
+            <span>(47) 99999-0000</span>
+          </div>
+        </a>
+        <a href="mailto:vilcioneiluiz@gmail.com" class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <strong>E-mail</strong>
+            <span>vilcioneiluiz@gmail.com</span>
+          </div>
+        </a>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <strong>Localização</strong>
+            <span>Joinville — SC</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="contact-item-text">
+            <strong>Horário</strong>
+            <span>Seg–Sex: 08h às 18h</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-copy">© 2026 TecTextil Soluções Têxteis. Todos os direitos reservados.</div>
+    <div class="footer-links">
+      <a href="#home">Início</a>
+      <a href="#about">Sobre</a>
+      <a href="#services">Serviços</a>
+      <a href="#contact">Contato</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5547999990000?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contato WhatsApp">
+  <span class="whatsapp-tooltip">Fale conosco!</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// ========== NAVBAR SCROLL ==========
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ========== MOBILE MENU ==========
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('open');
+  });
+});
+
+// ========== SCROLL REVEAL ==========
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+revealElements.forEach(el => revealObserver.observe(el));
+
+// ========== COUNTER ANIMATION ==========
+const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+let counterDone = false;
+function animateCounters() {
+  if (counterDone) return;
+  counterDone = true;
+  statNumbers.forEach(el => {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const prefix = '+';
+    const duration = 2000;
+    const step = Math.max(1, Math.floor(target / (duration / 16)));
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = (suffix === '%' ? '' : prefix) + current + suffix;
+    }, 16);
+  });
+}
+const statsBar = document.querySelector('.stats-bar');
+const statsObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) animateCounters();
+}, { threshold: 0.3 });
+statsObserver.observe(statsBar);
+
+// ========== SMOOTH SCROLL ==========
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
